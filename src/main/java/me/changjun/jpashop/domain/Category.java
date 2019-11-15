@@ -35,4 +35,9 @@ public class Category {
 
     @OneToMany(mappedBy = "parant")
     private List<Category> child = new ArrayList<>();
+
+    public void addChildCategory(Category child) {
+        this.child.add(child);
+        child.setParant(this);
+    }
 }
