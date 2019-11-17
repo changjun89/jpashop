@@ -9,8 +9,11 @@ import me.changjun.jpashop.domain.item.Item;
 import me.changjun.jpashop.repository.ItemRepository;
 import me.changjun.jpashop.repository.MemberRepository;
 import me.changjun.jpashop.repository.OrderRepository;
+import me.changjun.jpashop.repository.OrderSearch;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -52,5 +55,9 @@ public class OrderService {
         Order order = orderRepository.findOne(orderId);
         //주문 취소
         order.cancel();
+    }
+
+    public List<Order> findOrders(OrderSearch orderSearch) {
+        return orderRepository.findAll(orderSearch);
     }
 }
