@@ -7,6 +7,7 @@ import me.changjun.jpashop.domain.Order;
 import me.changjun.jpashop.domain.OrderStatus;
 import me.changjun.jpashop.repository.OrderRepository;
 import me.changjun.jpashop.repository.OrderSearch;
+import me.changjun.jpashop.repository.OrderSimpleQueryDto;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -49,13 +50,16 @@ public class OrderSimpleApiController {
 
     @GetMapping("/api/v3/simple-orders")
     public List<SimpleOrderDto> ordersV3() {
-        //order 2개
-        //n + 1 -> 1 + 회원 N + 배송 N
         List<Order> orders = orderRepository.findAllWithMemberDelivery();
 
         return orders.stream()
                 .map(order -> new SimpleOrderDto(order))
                 .collect(Collectors.toList());
+    }
+
+    @GetMapping("/api/v4/simple-orders")
+    public List<OrderSimpleQueryDto> ordersV4() {
+        return orderRepository.findOrderDtos();
     }
 
     @Data
