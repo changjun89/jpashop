@@ -1,4 +1,4 @@
-package me.changjun.jpashop.repository;
+package me.changjun.jpashop.repository.order.simplequery;
 
 import lombok.Data;
 import me.changjun.jpashop.domain.Address;
