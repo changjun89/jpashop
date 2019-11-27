@@ -8,6 +8,7 @@ import me.changjun.jpashop.domain.OrderItem;
 import me.changjun.jpashop.domain.OrderStatus;
 import me.changjun.jpashop.repository.OrderRepository;
 import me.changjun.jpashop.repository.OrderSearch;
+import me.changjun.jpashop.repository.order.query.OrderFlatDto;
 import me.changjun.jpashop.repository.order.query.OrderQueryDto;
 import me.changjun.jpashop.repository.order.query.OrderQueryRepository;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -74,7 +75,12 @@ public class OrderApiController {
 
     @GetMapping("/api/v5/orders")
     public List<OrderQueryDto> ordersV5() {
-        return orderQueryRepository.findAllbyDto_optimization();
+        return orderQueryRepository.findAllByDto_optimization();
+    }
+
+    @GetMapping("/api/v6/orders")
+    public List<OrderFlatDto> ordersV6() {
+        return orderQueryRepository.findAllByDto_flat();
     }
 
     @Data
