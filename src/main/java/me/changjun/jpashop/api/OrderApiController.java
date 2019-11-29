@@ -8,6 +8,7 @@ import me.changjun.jpashop.domain.OrderItem;
 import me.changjun.jpashop.domain.OrderStatus;
 import me.changjun.jpashop.repository.OrderRepository;
 import me.changjun.jpashop.repository.OrderSearch;
+import me.changjun.jpashop.service.query.OrderQueryService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,6 +23,7 @@ import static java.util.stream.Collectors.toList;
 public class OrderApiController {
 
     private final OrderRepository orderRepository;
+    private final OrderQueryService orderQueryService;
 
     @GetMapping("/api/v1/orders")
     public List<Order> ordersV1() {
@@ -62,6 +64,11 @@ public class OrderApiController {
                 .map(OrderDto::new)
                 .collect(toList());
         return collect;
+    }
+
+    @GetMapping("/api/v7/orders")
+    public List<me.changjun.jpashop.service.query.OrderDto> ordersV7_osiv() {
+        return orderQueryService.ordersV7_osiv();
     }
 
     @Data
