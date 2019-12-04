@@ -8,9 +8,7 @@ import me.changjun.jpashop.domain.OrderItem;
 import me.changjun.jpashop.domain.OrderStatus;
 import me.changjun.jpashop.repository.OrderRepository;
 import me.changjun.jpashop.repository.OrderSearch;
-import me.changjun.jpashop.repository.order.query.OrderFlatDto;
-import me.changjun.jpashop.repository.order.query.OrderQueryDto;
-import me.changjun.jpashop.repository.order.query.OrderQueryRepository;
+import me.changjun.jpashop.service.query.OrderQueryService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,7 +23,7 @@ import static java.util.stream.Collectors.toList;
 public class OrderApiController {
 
     private final OrderRepository orderRepository;
-    private final OrderQueryRepository orderQueryRepository;
+    private final OrderQueryService orderQueryService;
 
     @GetMapping("/api/v1/orders")
     public List<Order> ordersV1() {
@@ -68,19 +66,9 @@ public class OrderApiController {
         return collect;
     }
 
-    @GetMapping("/api/v4/orders")
-    public List<OrderQueryDto> ordersV4() {
-        return orderQueryRepository.findOrderQueryDtos();
-    }
-
-    @GetMapping("/api/v5/orders")
-    public List<OrderQueryDto> ordersV5() {
-        return orderQueryRepository.findAllByDto_optimization();
-    }
-
-    @GetMapping("/api/v6/orders")
-    public List<OrderFlatDto> ordersV6() {
-        return orderQueryRepository.findAllByDto_flat();
+    @GetMapping("/api/v7/orders")
+    public List<me.changjun.jpashop.service.query.OrderDto> ordersV7_osiv() {
+        return orderQueryService.ordersV7_osiv();
     }
 
     @Data
